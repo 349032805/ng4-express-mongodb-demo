@@ -1,8 +1,13 @@
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card">
-  <h4 class="card-header">Login</h4>
-  <div class="card-block">
+<div class="login-register-tabs">
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation"  [ngClass]="{'active':tab=='login'}" (click)="tab='login'"><a href="javascript:void(0)">Login</a></li>
+    <li role="presentation" [ngClass]="{'active':tab=='register'}" (click)="tab='register'"><a href="javascript:void(0)">Register</a></li>
+  </ul>
+</div>
+
+<div class="login-block" *ngIf="tab=='login'">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="input-group" [ngClass]="setClassEmail()">
         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
@@ -12,7 +17,10 @@
         <span class="input-group-addon"><i class="fa fa-key"></i></span>
         <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid"><i class="fa fa-sign-in"></i> Login</button>
+      <button class="btn btn-primary login-btn" type="submit" [disabled]="!loginForm.valid"><i class="fa fa-sign-in"></i> Login</button>
     </form>
   </div>
-</div>
+
+  <div class="register-block" *ngIf="tab=='register'">
+   aaaa
+  </div>

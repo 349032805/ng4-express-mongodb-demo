@@ -7,7 +7,8 @@ import { ToastComponent } from '../shared/toast/toast.component';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
 
@@ -17,6 +18,8 @@ export class LoginComponent implements OnInit {
                                        Validators.maxLength(100)]);
   password = new FormControl('', [Validators.required,
                                           Validators.minLength(6)]);
+  //切换tab
+  tab ='login';
 
   constructor(private auth: AuthService,
               private formBuilder: FormBuilder,
