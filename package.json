@@ -15,7 +15,6 @@
     "lintbe": "tslint server/**/**.ts{,x}",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
