@@ -16,8 +16,8 @@
  			<tr *ngFor="let song of songs">
  				<td>{{song.song_name}}</td>
  				<td>{{song.singer}}</td>
- 				<td>{{song.create_at}}</td>
- 				<td>{{song.update_at}}</td>
+ 				<td>{{song.create_at | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+ 				<td>{{song.update_at | date:'yyyy-MM-dd hh:mm:ss'}}</td>
  				<td>
  					<button type="button" class="btn btn-info" (click)="showDetail(song)"><i class="fa fa-search"></i> 查看</button>
  					<button type="button" class="btn btn-info" (click)="edit(song)"><i class="fa fa-pencil"></i> 修改</button>
@@ -28,18 +28,18 @@
   </table>
 
   <div class="add-sign">
- 		<span class='glyphicon glyphicon-plus-sign' (click)="addSong()"></span>
+ 		<span class='glyphicon glyphicon-plus-sign' (click)="showModal = true"></span>
    </div>
   
    <div class="bg-layer" *ngIf="showModal"></div>
  	 <div class="add-modal" *ngIf="showModal">
       <!-- <div class="modal-title">{{mode==0?'添加':'修改'}}歌曲</div> -->
       <div class="modal-title">歌曲</div>
- 	 	<form class="form-group form-horizontal song-form" role="form">
+ 	 	<form class="form-group form-horizontal song-form" role="form" [formGroup]="songForm" (ngSubmit)="sureAddOrEdit()">
 			<div class="form-group">
 			    <label class="col-xs-3 col-md-3 control-label">歌曲名:</label>
 			    <div class="col-xs-7 col-md-7">
-			      <input class="form-control" type="text" placeholder="歌曲名" maxlength="20">
+			      <input class="form-control" type="text" name="song_name" formControlName="song_name" placeholder="歌曲名" maxlength="20">
 			    </div>
 			    <span class="col-xs-1 col-md-1 require">*</span>
 			</div>
@@ -47,14 +47,15 @@
 			<div class="form-group">
 			    <label class="col-xs-3 col-md-3 control-label">歌手:</label>
 			    <div class="col-xs-7 col-md-7">
-			      <input class="form-control" type="text" placeholder="歌手" maxlength="4">
+			      <input class="form-control" type="text" name="singer" formControlName="singer" placeholder="歌手" maxlength="4">
 			    </div>
 			</div>
-	  	</form>
 
-	  	<div class="opt">
-	  		<button type="button" class="btn btn-default float-left" (click)="closeModal()">取消</button>
-	  		<button type="button" class="btn btn-success float-right" (click)="sureAddOrEdit()">确定</button>
-	  	</div>
+				<div class="opt">
+					<button type="button" class="btn btn-default float-left" (click)="showModal = false">取消</button>
+					<button class="btn btn-success float-right"  type="submit" [disabled]="!songForm.valid">确定</button>
+	  		</div>
+	  	</form>
+	  
  	  </div>
 </div>

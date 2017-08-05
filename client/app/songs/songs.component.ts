@@ -15,11 +15,11 @@ export class SongsComponent implements OnInit {
   song = {};
   songs = [];
   isLoading = true;
+  showModal = false;
 
-  // addCatForm: FormGroup;
-  // name = new FormControl('', Validators.required);
-  // age = new FormControl('', Validators.required);
-  // weight = new FormControl('', Validators.required);
+  songForm: FormGroup;
+  song_name = new FormControl('', Validators.required);
+  singer = "";
 
   constructor(private songService: SongService,
               private formBuilder: FormBuilder,
@@ -28,11 +28,12 @@ export class SongsComponent implements OnInit {
 
   ngOnInit() {
     this.getSongs();
-    // this.addCatForm = this.formBuilder.group({
-    //   name: this.name,
-    //   age: this.age,
-    //   weight: this.weight
-    // });
+    this.songForm = this.formBuilder.group({
+      song_name: this.song_name,
+      singer: this.singer,
+      create_at: new Date().getTime(),
+      update_at: new Date().getTime()
+    });
   }
 
   getSongs() {
@@ -40,6 +41,18 @@ export class SongsComponent implements OnInit {
       data => this.songs = data,
       error => console.log(error),
       () => this.isLoading = false
+    );
+  }
+
+  sureAddOrEdit(){
+    this.songService.addSong(this.songForm.value).subscribe(
+      res => {
+        this.songForm.reset();
+        this.showModal = false;
+        this.getSongs();
+        this.toast.setMessage('添加成功', 'success');
+      },
+      error => console.log(error)
     );
   }
 
