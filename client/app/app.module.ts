@@ -15,6 +15,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { SongsComponent } from './songs/songs.component';
+import { SongDetailComponent } from './songDetail/songDetail.component';
 import { SongService } from './services/song.service';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SongService } from './services/song.service';
     LoginComponent,
     LogoutComponent,
     NotFoundComponent,
-    SongsComponent
+    SongsComponent,
+    SongDetailComponent
   ],
   imports: [
     RoutingModule,

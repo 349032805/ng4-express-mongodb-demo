@@ -19,7 +19,7 @@
  				<td>{{song.create_at | date:'yyyy-MM-dd hh:mm:ss'}}</td>
  				<td>{{song.update_at | date:'yyyy-MM-dd hh:mm:ss'}}</td>
  				<td>
- 					<button type="button" class="btn btn-info" (click)="showDetail(song)"><i class="fa fa-search"></i> 查看</button>
+ 					<button type="button" class="btn btn-info" (click)="gotoDetail(song)"><i class="fa fa-search"></i> 查看</button>
  					<button type="button" class="btn btn-info" (click)="edit(song)"><i class="fa fa-pencil"></i> 修改</button>
  					<button type="button" class="btn btn-danger" (click)="deleteSong(song)"><i class="fa fa-trash"></i> 删除</button>
  				</td>

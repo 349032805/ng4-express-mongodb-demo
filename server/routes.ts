@@ -32,6 +32,7 @@ export default function setRoutes(app) {
 
   router.route('/getSongs').get(songCtrl.getAll);
   router.route('/addSong').post(songCtrl.insert);
+  router.route('/getSongDetail/:id').get(songCtrl.get);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

@@ -20,4 +20,8 @@ export class SongService {
     return this.http.post('/api/addSong', JSON.stringify(song), this.options);
   }
 
+  getSongDetail(id): Observable<any> {
+    return this.http.get(`/api/getSongDetail/${id}`).map(res => res.json());
+  }
+
 }

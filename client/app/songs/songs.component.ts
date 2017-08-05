@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { SongService } from '../services/song.service';
@@ -24,6 +25,7 @@ export class SongsComponent implements OnInit {
   constructor(private songService: SongService,
               private formBuilder: FormBuilder,
               private http: Http,
+              private router: Router,
               public toast: ToastComponent) { }
 
   ngOnInit() {
@@ -54,6 +56,10 @@ export class SongsComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+
+  gotoDetail(song){
+    this.router.navigate(['/songDetail', 1],{ queryParams: { id: song._id } });
   }
 
 }
