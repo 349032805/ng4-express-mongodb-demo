@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.auth.loggedIn) {
-      this.router.navigate(['/cats']);
+      this.router.navigate(['/songs']);
     }
     this.loginForm = this.formBuilder.group({
       email: this.email,
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.auth.login(this.loginForm.value).subscribe(
-      res => this.router.navigate(['/cats']),
+      res => this.router.navigate(['/songs']),
       error => this.toast.setMessage('无效的邮箱或密码!', 'danger')
     );
   }

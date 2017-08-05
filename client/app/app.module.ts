@@ -14,6 +14,9 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { SongsComponent } from './songs/songs.component';
+import { SongService } from './services/song.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SongsComponent
   ],
   imports: [
     RoutingModule,
@@ -32,7 +36,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AuthGuardLogin,
     AuthGuardAdmin,
     CatService,
-    UserService
+    UserService,
+    SongService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

@@ -1,0 +1,60 @@
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="songs" *ngIf="!isLoading">
+  <table class="song-table">
+ 		<thead>
+ 			<th>歌曲</th>
+ 			<th>歌手</th>
+ 			<th>创建时间</th>
+ 			<th>更新时间</th>
+ 			<th>操作</th>
+ 		</thead>
+ 		<tbody>
+
+ 			<tr *ngFor="let song of songs">
+ 				<td>{{song.song_name}}</td>
+ 				<td>{{song.singer}}</td>
+ 				<td>{{song.create_at}}</td>
+ 				<td>{{song.update_at}}</td>
+ 				<td>
+ 					<button type="button" class="btn btn-info" (click)="showDetail(song)"><i class="fa fa-search"></i> 查看</button>
+ 					<button type="button" class="btn btn-info" (click)="edit(song)"><i class="fa fa-pencil"></i> 修改</button>
+ 					<button type="button" class="btn btn-danger" (click)="deleteSong(song)"><i class="fa fa-trash"></i> 删除</button>
+ 				</td>
+ 			</tr>
+ 		</tbody>
+  </table>
+
+  <div class="add-sign">
+ 		<span class='glyphicon glyphicon-plus-sign' (click)="addSong()"></span>
+   </div>
+  
+   <div class="bg-layer" *ngIf="showModal"></div>
+ 	 <div class="add-modal" *ngIf="showModal">
+      <!-- <div class="modal-title">{{mode==0?'添加':'修改'}}歌曲</div> -->
+      <div class="modal-title">歌曲</div>
+ 	 	<form class="form-group form-horizontal song-form" role="form">
+			<div class="form-group">
+			    <label class="col-xs-3 col-md-3 control-label">歌曲名:</label>
+			    <div class="col-xs-7 col-md-7">
+			      <input class="form-control" type="text" placeholder="歌曲名" maxlength="20">
+			    </div>
+			    <span class="col-xs-1 col-md-1 require">*</span>
+			</div>
+
+			<div class="form-group">
+			    <label class="col-xs-3 col-md-3 control-label">歌手:</label>
+			    <div class="col-xs-7 col-md-7">
+			      <input class="form-control" type="text" placeholder="歌手" maxlength="4">
+			    </div>
+			</div>
+	  	</form>
+
+	  	<div class="opt">
+	  		<button type="button" class="btn btn-default float-left" (click)="closeModal()">取消</button>
+	  		<button type="button" class="btn btn-success float-right" (click)="sureAddOrEdit()">确定</button>
+	  	</div>
+ 	  </div>
+</div>
