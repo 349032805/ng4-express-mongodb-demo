@@ -1,12 +1,16 @@
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card">
-  <h4 class="card-header">Register</h4>
-  <div class="card-block">
+<div class="login-register-tabs">
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation"><a href="/login">Login</a></li>
+    <li role="presentation" class="active"><a href="javascript:void(0)">Register</a></li>
+  </ul>
+</div>
+<div class="register-block">
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <div class="input-group" [ngClass]="setClassUsername()">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-        <input class="form-control" type="text" name="username" formControlName="username" placeholder="Username" autofocus>
+        <input class="form-control" type="text" name="username" formControlName="username" placeholder="Username" autofocus maxlength="30">
       </div>
       <div class="input-group" [ngClass]="setClassEmail()">
         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
@@ -20,11 +24,12 @@
         <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
         <select class="form-control" name="role" formControlName="role">
           <option value="" selected disabled>Role</option>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
+          <option value="法师">法师</option>
+          <option value="战士">战士</option>
+          <option value="刺客">刺客</option>
+          <option value="坦克">坦克</option>
         </select>
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>
+      <button class="btn btn-primary register-btn" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>
     </form>
-  </div>
 </div>

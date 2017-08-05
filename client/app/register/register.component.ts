@@ -6,7 +6,8 @@ import { ToastComponent } from '../shared/toast/toast.component';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.less']
 })
 export class RegisterComponent implements OnInit {
 
@@ -50,10 +51,10 @@ export class RegisterComponent implements OnInit {
   register() {
     this.userService.register(this.registerForm.value).subscribe(
       res => {
-        this.toast.setMessage('you successfully registered!', 'success');
+        this.toast.setMessage('注册成功!', 'success');
         this.router.navigate(['/login']);
       },
-      error => this.toast.setMessage('email already exists', 'danger')
+      error => this.toast.setMessage('邮箱已存在', 'danger')
     );
   }
 }
