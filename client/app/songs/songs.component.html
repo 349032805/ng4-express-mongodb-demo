@@ -2,6 +2,10 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
+<div class="logout float-right">
+		<a class="btn btn-info logout-btn" type="button" href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+</div>
+
 <div class="songs" *ngIf="!isLoading">
   <table class="song-table">
  		<thead>

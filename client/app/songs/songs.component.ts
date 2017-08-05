@@ -62,4 +62,14 @@ export class SongsComponent implements OnInit {
     this.router.navigate(['/songDetail', 1],{ queryParams: { id: song._id } });
   }
 
+  deleteSong(song){
+    this.songService.deleteSong(song).subscribe(
+        res => {
+          this.getSongs();
+          this.toast.setMessage('删除成功', 'success');
+        },
+        error => console.log(error)
+    );
+  }
+
 }

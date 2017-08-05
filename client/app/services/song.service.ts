@@ -24,4 +24,8 @@ export class SongService {
     return this.http.get(`/api/getSongDetail/${id}`).map(res => res.json());
   }
 
+  deleteSong(song): Observable<any> {
+    return this.http.delete(`/api/deleteSong/${song._id}`, this.options);
+  }
+
 }
