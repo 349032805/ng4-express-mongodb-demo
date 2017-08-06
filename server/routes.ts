@@ -13,11 +13,6 @@ export default function setRoutes(app) {
   // Users
   router.route('/login').post(userCtrl.login);
   router.route('/register').post(userCtrl.insert);
-  router.route('/users').get(userCtrl.getAll);
-  router.route('/users/count').get(userCtrl.count);
-  router.route('/user/:id').get(userCtrl.get);
-  router.route('/user/:id').put(userCtrl.update);
-  router.route('/user/:id').delete(userCtrl.delete);
 
   router.route('/getSongs').get(songCtrl.getAll);
   router.route('/addSong').post(songCtrl.insert);
