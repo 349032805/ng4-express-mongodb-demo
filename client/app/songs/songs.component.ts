@@ -81,6 +81,7 @@ export class SongsComponent implements OnInit {
   }
 
   editSong(song) {
+    song.update_at = new Date().getTime();
     this.songService.editSong(song).subscribe(
       res => {
         this.showEditModal = false;
