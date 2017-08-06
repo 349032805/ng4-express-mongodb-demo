@@ -28,4 +28,8 @@ export class SongService {
     return this.http.delete(`/api/deleteSong/${song._id}`, this.options);
   }
 
+  editSong(song): Observable<any> {
+    return this.http.put(`/api/updateSong/${song._id}`, JSON.stringify(song), this.options);
+  }
+
 }

@@ -16,11 +16,14 @@ export class SongsComponent implements OnInit {
   song = {};
   songs = [];
   isLoading = true;
-  showModal = false;
+  showAddModal = false;
+  showEditModal = false;
 
   songForm: FormGroup;
   song_name = new FormControl('', Validators.required);
   singer = "";
+
+  editSongObj = {};
 
   constructor(private songService: SongService,
               private formBuilder: FormBuilder,
@@ -46,11 +49,11 @@ export class SongsComponent implements OnInit {
     );
   }
 
-  sureAddOrEdit(){
+  addSong(){
     this.songService.addSong(this.songForm.value).subscribe(
       res => {
         this.songForm.reset();
-        this.showModal = false;
+        this.showAddModal = false;
         this.getSongs();
         this.toast.setMessage('添加成功', 'success');
       },
@@ -72,4 +75,24 @@ export class SongsComponent implements OnInit {
     );
   }
 
+  gotoEdit(song){
+    this.showEditModal = true;
+    this.song = song;
+  }
+
+  editSong(song) {
+    this.songService.editSong(song).subscribe(
+      res => {
+        this.showEditModal = false;
+        this.getSongs();
+        this.toast.setMessage('修改成功', 'success');
+      },
+      error => console.log(error)
+    );
+  }
+
+  cancelEdit(){
+    this.showEditModal = false;
+    this.getSongs();
+  }
 }

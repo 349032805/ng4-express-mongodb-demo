@@ -15,7 +15,7 @@
  			<th>更新时间</th>
  			<th>操作</th>
  		</thead>
- 		<tbody>
+ 		<tbody *ngIf="!showEditModal">
 
  			<tr *ngFor="let song of songs">
  				<td>{{song.song_name}}</td>
@@ -24,7 +24,7 @@
  				<td>{{song.update_at | date:'yyyy-MM-dd hh:mm:ss'}}</td>
  				<td>
  					<button type="button" class="btn btn-info" (click)="gotoDetail(song)"><i class="fa fa-search"></i> 查看</button>
- 					<button type="button" class="btn btn-info" (click)="edit(song)"><i class="fa fa-pencil"></i> 修改</button>
+ 					<button type="button" class="btn btn-info" (click)="gotoEdit(song)"><i class="fa fa-pencil"></i> 修改</button>
  					<button type="button" class="btn btn-danger" (click)="deleteSong(song)"><i class="fa fa-trash"></i> 删除</button>
  				</td>
  			</tr>
@@ -32,14 +32,13 @@
   </table>
 
   <div class="add-sign">
- 		<span class='glyphicon glyphicon-plus-sign' (click)="showModal = true"></span>
+ 		<span class='glyphicon glyphicon-plus-sign' (click)="showAddModal = true"></span>
    </div>
   
-   <div class="bg-layer" *ngIf="showModal"></div>
- 	 <div class="add-modal" *ngIf="showModal">
-      <!-- <div class="modal-title">{{mode==0?'添加':'修改'}}歌曲</div> -->
-      <div class="modal-title">歌曲</div>
- 	 	<form class="form-group form-horizontal song-form" role="form" [formGroup]="songForm" (ngSubmit)="sureAddOrEdit()">
+   <div class="bg-layer" *ngIf="showAddModal||showEditModal"></div>
+ 	 <div class="add-modal" *ngIf="showAddModal">
+      <div class="modal-title">添加歌曲</div>
+ 	 	<form class="form-group form-horizontal song-form" role="form" [formGroup]="songForm" (ngSubmit)="addSong()">
 			<div class="form-group">
 			    <label class="col-xs-3 col-md-3 control-label">歌曲名:</label>
 			    <div class="col-xs-7 col-md-7">
@@ -56,10 +55,39 @@
 			</div>
 
 				<div class="opt">
-					<button type="button" class="btn btn-default float-left" (click)="showModal = false">取消</button>
+					<button type="button" class="btn btn-default float-left" (click)="showAddModal = false">取消</button>
 					<button class="btn btn-success float-right"  type="submit" [disabled]="!songForm.valid">确定</button>
 	  		</div>
 	  	</form>
-	  
- 	  </div>
+		 </div>
+
+		 <!-- 修改歌曲 -->
+			<!-- 修改有个恶心的地方,就是选取列表中的对象传入了编辑区域,引入的是同一个对象,导致列表中的对象也发生改变. -->
+			<!-- 所以在显示编辑模态框的时候,隐藏列表.如果修改后点击了取消按钮,要刷新页面还原数据 -->
+			<!-- 要么只能把编辑做成单独的页面,这样就没有任何影响了 -->
+		<div class="add-modal" *ngIf="showEditModal">
+      <div class="modal-title">修改歌曲</div>
+ 	 	<form class="form-group form-horizontal song-form" role="form"  #form="ngForm" (ngSubmit)="editSong(song)">
+			<div class="form-group">
+			    <label class="col-xs-3 col-md-3 control-label">歌曲名:</label>
+			    <div class="col-xs-7 col-md-7">
+			      <input class="form-control" type="text" name="song_name" [(ngModel)]="song.song_name" placeholder="歌曲名" maxlength="20" required>
+			    </div>
+			    <span class="col-xs-1 col-md-1 require">*</span>
+			</div>
+
+			<div class="form-group">
+			    <label class="col-xs-3 col-md-3 control-label">歌手:</label>
+			    <div class="col-xs-7 col-md-7">
+			      <input class="form-control" type="text" name="singer" [(ngModel)]="song.singer" placeholder="歌手" maxlength="4">
+			    </div>
+			</div>
+
+				<div class="opt">
+					<button type="button" class="btn btn-default float-left" (click)="cancelEdit()">取消</button>
+					<button class="btn btn-success float-right"  type="submit" [disabled]="!form.form.valid">确定</button>
+	  		</div>
+	  	</form>
+		 </div>
+
 </div>
