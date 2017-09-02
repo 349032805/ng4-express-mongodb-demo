@@ -11,7 +11,10 @@ import { SongService } from '../services/song.service';
 })
 export class SongDetailComponent implements OnInit {
 
-  song = {};
+  song = {
+    song_name: '',
+    singer: ''
+  };
   isLoading = true;
 
   constructor(private songService: SongService,
